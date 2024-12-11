@@ -6,8 +6,12 @@ import {ERC20Votes} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Vo
 import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import {Nonces} from "@openzeppelin/contracts/utils/Nonces.sol";
 
-contract MyToken is ERC20, ERC20Votes, ERC20Permit {
+contract GovToken is ERC20, ERC20Votes, ERC20Permit {
     constructor() ERC20("MyToken", "MTK") ERC20Permit("MyToken") {}
+
+    function mint(address account, uint256 amount) external {
+        _mint(account, amount);
+    }
 
     function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Votes) {
         super._update(from, to, value);
